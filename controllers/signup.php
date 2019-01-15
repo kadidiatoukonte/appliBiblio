@@ -52,4 +52,4 @@ if(isset($_POST['new'])){
 $admins = $adminManager->getAdmins();
 
 // Enfin, on inclut la vue
-include "../views/loginView.php";
+include "../views/signupView.php";

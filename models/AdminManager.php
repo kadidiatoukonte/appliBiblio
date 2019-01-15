@@ -1,6 +1,8 @@
 <?php
 
-class AdminManager {
+class AdminManager 
+{
+
   private $_db;
 
   /**
@@ -13,6 +15,24 @@ class AdminManager {
   }
 
   /**
+   * Set the value of _db
+   *
+   * @param PDO $db
+   * @return  self
+   */ 
+  public function setDb(PDO $db) {
+    $this->_db = $db;
+    return $this;
+  }
+
+  /**
+   * Get the value of _db
+   */ 
+  public function getDb() {
+    return $this->_db;
+  }
+
+  /**
      * verif if user exist
      *
      * @param User $user
@@ -22,6 +42,7 @@ class AdminManager {
     {
         $query = $this->getBdd()->prepare('SELECT * FROM admins WHERE name = :name');
         $query->bindValue(':name', $admin->getName(), PDO::PARAM_STR);
+
         $query->execute();
         $admins = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($admins as $getAdmin) {
@@ -54,10 +75,10 @@ class AdminManager {
      */
     public function createAdmin(Admin $admin)
     {
-        $query = $this->gedb()->prepare('INSERT INTO admins(name, password, verifConnect) VALUES(:name, :password, :verifConnect)');
-        $query->bindValue(':name', $user->getName(), PDO::PARAM_STR);
-        $query->bindValue(':password', $user->getPassword(), PDO::PARAM_STR);
-        $query->bindValue(':verifConnect', $user->getVerifConnect(), PDO::PARAM_INT);
+        $query = $this->gedb()->prepare('INSERT INTO admins(name, mdp, mail) VALUES(:name, :mdp, :mail)');
+        $query->bindValue(':name', $admin->getName(), PDO::PARAM_STR);     
+        $query->bindValue(':mail', $admin->getMail(), PDO::PARAM_STR);
+        $query->bindValue(':mdp', $admin->getMdp(), PDO::PARAM_STR);
         $query->execute();
     }
     /**
@@ -68,29 +89,11 @@ class AdminManager {
      */
     public function updateAdmin(Admin $admin)
     {
-        $updatedb = $this->_db->prepare('UPDATE user SET verifConnect = :verifConnect WHERE id = :id');
+        $updatedb = $this->_db->prepare('UPDATE admin SET mail = :mail WHERE id = :id');
         $updatedb->bindValue(':id', $admin->getId(), PDO::PARAM_INT);
-        $updatedb->bindValue(':verifConnect', $admin->getVerifConnect(), PDO::PARAM_INT);
+        $updatedb->bindValue(':mail', $admin->getMail(), PDO::PARAM_STR);
         $updatedb->execute();
     }
-
-  /**
-   * Set the value of _db
-   *
-   * @param PDO $db
-   * @return  self
-   */ 
-  public function setDb(PDO $db) {
-    $this->_db = $db;
-    return $this;
-  }
-
-  /**
-   * Get the value of _db
-   */ 
-  public function getDb() {
-    return $this->_db;
-  }
 
   
   /**
@@ -100,9 +103,9 @@ class AdminManager {
    */
   public function getAdmins() 
   {
+    $arrayOfAdmins = [];
     $query = $this->getDb()->query('SELECT * FROM admins');
-    // $query = $this->_db->query('SELECT * FROM users');
-    $users = $query->fetchAll(PDO::FETCH_ASSOC);
+    $admins = $query->fetchAll(PDO::FETCH_ASSOC);
 
     // A chaque tour, on instancie un nouvel objet User qu'on stocke dans $arrayOfUsers[]
     foreach ($admins as $admin) {
@@ -119,12 +122,10 @@ class AdminManager {
    */
   public function addAdmin(Admin $admin)
   {
-    $query = $this->getDb()->prepare('INSERT INTO admins(name) VALUES(:name)');
-    // $query->execute([
-    //   'pseudo' => $user->getPseudo()
-    // ]);
-    $query->bindValue(':name', $user->getName(), PDO::PARAM_STR);
-
+    $query = $this->getDb()->prepare('INSERT INTO admins(name, mail, mdp) VALUES(:name, :mail, :mdp)');
+    $query->bindValue(':name', $admin->getName(), PDO::PARAM_STR);
+    $query->bindValue(':mail', $admin->getMail(), PDO::PARAM_STR);
+    $query->bindValue(':mdp', $admin->getMdp(), PDO::PARAM_STR);
     $query->execute();
   }
 

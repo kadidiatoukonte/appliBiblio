@@ -2,12 +2,10 @@
 
 declare(strict_types = 1);
 
-class Admin
+class Categorie
 {
     protected   $name,
-                $id,
-                $mail,
-                $mdp;
+                $idCategorie;
 
     public function __construct(array $array)
     {
@@ -38,10 +36,10 @@ class Admin
      * @param int $id
      * @return  self
      */ 
-    public function setId( $id)
+    public function setIdCategorie( $idCategorie)
     {
-        $id = (int) $id;
-        $this->id = $id;
+        $idCategorie = (int) $idCategorie;
+        $this->idCategorie = $idCategorie;
         return $this;
     }
     
@@ -57,36 +55,15 @@ class Admin
         return $this;
     }
 
-    /**
-     * Set the value of mail
-     *
-     * @return  self
-     */ 
-    public function setMail($mail)
-    {
-        $this->mail = $mail;
-        return $this;
-    }
-
-    /**
-     * Set the value of mdp
-     *
-     * @return  self
-     */ 
-    public function setMdp($mdp)
-    {
-        $this->mdp = $mdp;
-        return $this;
-    }
 
     // Getters
 
     /**
      * Get the value of id
      */ 
-    public function getId()
+    public function getIdCategorie()
     {
-        return $this->id;
+        return $this->idCategorie;
     }
 
     /**
@@ -95,21 +72,5 @@ class Admin
     public function getName()
     {
         return $this->name;
-    }
-                          
-    /**
-     * Get the value of mail
-     */ 
-    public function getMail()
-    {
-        return $this->mail;
-    }
-
-    /**
-     * Get the value of mdp
-     */ 
-    public function getMdp()
-    {
-        return $this->mdp;
     }
 }

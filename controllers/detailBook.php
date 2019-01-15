@@ -17,7 +17,7 @@ spl_autoload_register('chargerClasse');
 $db = Database::DB();
 
 // On instancie notre manager
-$bookManager = new BookManager($db);
+$detailBookManager = new DetailBookManager($db);
 
 
 
@@ -47,7 +47,7 @@ if(isset($_POST['new'])){
 			// ]);
 
 			// On enregistre l'objet $account dans la base de données
-			$bookManager->add($book);
+			$detailBookManager->add($detailBook);
 
 		} 
 		// Si le nom ne correspond pas aux noms autorisés dans la classe, on déclare un message d'erreur
@@ -72,7 +72,7 @@ if(isset($_POST['delete'])){
 		$id = (int) $_POST['id'];
 
 		// On le supprime en BDD
-		$bookManager->delete($id);
+		$detailBookManager->delete($id);
 	}
 	else {
 		$error_message = "Veuillez choisir un livre à supprimer";
@@ -88,7 +88,7 @@ if(isset($_POST['delete'])){
 
 // On récupère tous les comptes dans la BDD
 // $accounts est un tableau contenant tous les objets comptes présents en DB
-$books = $bookManager->getBooks();
+$detailBooks = $detailBookManager->getDetailBooks();
 
 // Enfin, on inclut la vue
-include "../views/indexView.php";
+include "../views/detailBookView.php";
