@@ -2,28 +2,6 @@
   include("template/header.php");
 ?>
 
-<!DOCTYPE html>
-<html>
-<title>W3.CSS Template</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../assets/css/main.css">
-<body id="myPage">
-
-
-<!DOCTYPE html>
-<html>
-<title>Ma Bibliothèque</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 
@@ -34,9 +12,9 @@
     <h4><b>Ma Bibliothèque</b></h4>
   </div>
   <div class="w3-bar-block">
-    <a href="indexView.php" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Accueil</a>
-		<a href="detailBookView.php" class="w3-bar-item w3-button w3-padding w3-text-teal">Books</a>
-		<form class="w3-margin-top" action="index.php" method="post">
+    <a href="index.php" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Accueil</a>
+		<a href="detailBook.php" class="w3-bar-item w3-button w3-padding w3-text-teal">Books</a>
+		<form class="w3-margin-top" action="login.php" method="post">
 			<input class="w3-bar-item w3-button w3-padding" type="submit" name="logout" value="Me déconnecter">
 		</form>
   </div>
@@ -49,9 +27,9 @@
 				  <i class="fas fa-bars"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Accueil</a>
-          <a class="dropdown-item" href="#">Books</a>
-          <a class="dropdown-item" href="#">Me deconnecter</a>
+          <a class="dropdown-item" href="index.php">Accueil</a>
+          <a class="dropdown-item" href="book.php">Books</a>
+          <a class="dropdown-item" href="login.php">Me deconnecter</a>
         </div>
       </li>
     </ul>
@@ -96,15 +74,12 @@
       </div>
     <div>
 
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script type="text/javascript" src="js/main.js"></script>
 
 </body>
-</html>
-
 
 <?php
   include("template/footer.php");

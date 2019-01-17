@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 
 /**
- *  Classe permettant de gérer les opérations en base de données concernant les objets Account
+ *  Classe permettant de gérer les opérations en base de données concernant les objets Book
  */
 class DetailBookManager
 {
@@ -42,9 +42,9 @@ class DetailBookManager
 	}
 
 	/**
-	 * Add account to the database
+	 * Add book to the database
 	 *
-	 * @param Account $account
+	 * @param Book $book
 	 */
 	public function add(DetailBook $detailBook)
 	{
@@ -55,7 +55,7 @@ class DetailBookManager
 	}
 
 	/**
-	 * Get all accounts
+	 * Get all books
 	 *
 	 */
 	public function getDetailBooks()
@@ -67,20 +67,19 @@ class DetailBookManager
 		// On récupère un tableau contenant plusieurs tableaux associatifs
 		$dataDetailBooks = $query->fetchAll(PDO::FETCH_ASSOC);
 
-		// A chaque tour de boucle, on récupère un tableau associatif concernant un seul compte
 		foreach ($dataDetailBooks as $dataDetailBook) 
 		{
-			// On crée un nouvel objet grâce au tableau associatif, qu'on stocke dans $arrayOfAccounts
+			// On crée un nouvel objet grâce au tableau associatif, qu'on stocke dans $arrayOfBooks
 			$arrayOfDetailBooks[] = new DetailBook($dataDetailBook);
 		}
 		return $arrayOfDetailBooks;
 	}
 
 	/**
-	 * Get an account by id
+	 * Get an book by id
 	 *
 	 * @param integer $id
-	 * @return Account
+	 * @return Book
 	 */
 	public function getDetailBook(int $id)
 	{
@@ -94,9 +93,9 @@ class DetailBookManager
 	}
 
 	/**
-	 * Update account
+	 * Update book
 	 *
-	 * @param Account $account
+	 * @param Book $book
 	 */
 	public function update(DetailBook $detailBook)
 	{
@@ -107,7 +106,7 @@ class DetailBookManager
 	}
 
 	/**
-	 * Delete account
+	 * Delete book
 	 *
 	 * @param integer $id
 	 */

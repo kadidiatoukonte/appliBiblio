@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 
 /**
- *  Classe permettant de gérer les opérations en base de données concernant les objets Account
+ *  Classe permettant de gérer les opérations en base de données concernant les objets Book
  */
 class BookManager
 {
@@ -42,9 +42,9 @@ class BookManager
 	}
 
 	/**
-	 * Add account to the database
+	 * Add book to the database
 	 *
-	 * @param Account $account
+	 * @param Book $book
 	 */
 	public function add(Book $book)
 	{
@@ -53,7 +53,7 @@ class BookManager
         $query->bindValue("description", $book->getDescription(), PDO::PARAM_STR);
         $query->bindValue("author", $book->getAuthor(), PDO::PARAM_STR);
         $query->bindValue("release_date", $book->getRelease_date(), PDO::PARAM_STR);
-        $query->bindValue("available", $book->getAvailable(), PDO::PARAM_STR);
+        $query->bindValue("available", $book->getAvailable(), PDO::PARAM_INT);
         $query->bindValue("categorie_id", $book->getCategorie_id(), PDO::PARAM_INT);
         $query->bindValue("image_id", $book->getImage_id(), PDO::PARAM_INT);
         $query->bindValue("user_id", $book->getUser_id(), PDO::PARAM_INT);
@@ -61,33 +61,37 @@ class BookManager
 	}
 
 	/**
-	 * Get all accounts
+	 * Get all books
 	 *
 	 */
 	public function getBooks()
 	{
 
-		$arrayOfBooks = [];
-		$query = $this->getDb()->prepare('SELECT *
-										FROM books');
+		$array['books'] = [];
+		$array['images'] = [];
+		$arrayOfAll = [];
+		$query = $this->getDb()->prepare('SELECT * FROM books');
 		$query->execute();
 		// On récupère un tableau contenant plusieurs tableaux associatifs
 		$dataBooks = $query->fetchAll(PDO::FETCH_ASSOC);
 
-		// A chaque tour de boucle, on récupère un tableau associatif concernant un seul compte
 		foreach ($dataBooks as $dataBook) 
 		{
-			// On crée un nouvel objet grâce au tableau associatif, qu'on stocke dans $arrayOfAccounts
-			$arrayOfBooks[] = new Book($dataBook);
+			// On crée un nouvel objet grâce au tableau associatif, qu'on stocke dans $arrayOfBooks
+			$array['books'] = new Book($dataBook);
+			$array['images'] = new Image($dataBook);
+			
+			$arrayOfAll[] = $array;
+		
 		}
-		return $arrayOfBooks;
+        return $arrayOfAll;
 	}
 
 	/**
-	 * Get an account by id
+	 * Get an book by id
 	 *
 	 * @param integer $id
-	 * @return Account
+	 * @return Book
 	 */
 	public function getBook(int $id)
 	{
@@ -101,20 +105,25 @@ class BookManager
 	}
 
 	/**
-	 * Update account
+	 * Update book
 	 *
-	 * @param Account $account
+	 * @param Book $book
 	 */
-	public function update(Book $book)
+	public function update(Books $book)
 	{
-		$query = $this->getDb()->prepare('UPDATE books SET name = :name WHERE id = :id');
-		$query->bindValue("title", $book->getTitle(), PDO::PARAM_STR);
-		$query->bindValue("id", $book->getId(), PDO::PARAM_INT);
-		$query->execute();
+		$query = $this->getDb()->prepare('UPDATE books SET title = :title, author = :author, release_date = :release_date, description = :description, image_id = :image, categorie_id = :categorie WHERE id = :bookid');
+		$query->bindValue(':title', $book->getTitle(), PDO::PARAM_STR);
+        $query->bindValue(':author', $book->getAuthor(), PDO::PARAM_STR);
+        $query->bindValue(':release_date', $book->getRelease_date(), PDO::PARAM_STR);
+        $query->bindValue(':description', $book->getDescription(), PDO::PARAM_STR);
+        $query->bindValue(':image', $book->getImage_id(), PDO::PARAM_INT);
+        $query->bindValue(':categorie', $book->getCategorie_id(), PDO::PARAM_INT);
+        $query->bindValue(':bookid', $book->getId(), PDO::PARAM_INT);
+        $query->execute();
 	}
 
 	/**
-	 * Delete account
+	 * Delete book
 	 *
 	 * @param integer $id
 	 */

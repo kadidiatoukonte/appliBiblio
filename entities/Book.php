@@ -12,7 +12,8 @@ class Book
                 $available,
                 $categorie_id,
                 $image_id,
-                $user_id;
+                $user_id,
+                $file;
 
     public function __construct(array $array)
     {
@@ -91,9 +92,9 @@ class Book
      */ 
     public function setRelease_date($release_date)
     {
-                    $this->release_date = $release_date;
+        $this->release_date = $release_date;
 
-                    return $this;
+        return $this;
     }
 
     /**
@@ -103,9 +104,9 @@ class Book
      */ 
     public function setAvailable($available)
     {
-                    $this->available = $available;
+        $this->available = $available;
 
-                    return $this;
+        return $this;
     }
 
     /**
@@ -115,9 +116,9 @@ class Book
      */ 
     public function setCategorie_id($categorie_id)
     {
-                    $this->categorie_id = $categorie_id;
+        $this->categorie_id = $categorie_id;
 
-                    return $this;
+        return $this;
     }
 
     /**
@@ -127,9 +128,22 @@ class Book
      */ 
     public function setUser_id($user_id)
     {
-                    $this->user_id = $user_id;
+        $this->user_id = $user_id;
 
-                    return $this;
+        return $this;
+    }
+
+
+    /**
+     * Set the value of user_id
+     *
+     * @return  self
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
+
+        return $this;
     }
 
     /**
@@ -139,9 +153,9 @@ class Book
      */ 
     public function setImage_id($image_id)
     {
-                    $this->image_id = $image_id;
+        $this->image_id = $image_id;
 
-                    return $this;
+        return $this;
     }
 
     /**
@@ -157,7 +171,7 @@ class Book
      */ 
     public function getTitle()
     {
-                    return $this->title;
+        return $this->title;
     }
 
     /**
@@ -165,7 +179,7 @@ class Book
     */ 
     public function getDescription()
     {
-                    return $this->description;
+        return $this->description;
     }
 
     /**
@@ -173,7 +187,7 @@ class Book
     */ 
     public function getAuthor()
     {
-                    return $this->author;
+        return $this->author;
     }
 
     /**
@@ -181,7 +195,7 @@ class Book
     */ 
     public function getRelease_date()
     {
-                    return $this->release_date;
+        return $this->release_date;
     }
 
     /**
@@ -189,7 +203,7 @@ class Book
     */ 
     public function getAvailable()
     {
-                    return $this->available;
+        return $this->available;
     }
 
     /**
@@ -197,7 +211,7 @@ class Book
     */ 
     public function getCategorie_id()
     {
-                    return $this->categorie_id;
+        return $this->categorie_id;
     }
 
     /**
@@ -205,7 +219,7 @@ class Book
     */ 
     public function getImage_id()
     {
-                    return $this->image_id;
+        return $this->image_id;
     }
 
     /**
@@ -213,6 +227,14 @@ class Book
     */ 
     public function getUser_id()
     {
-                    return $this->user_id;
+        return $this->user_id;
+    }
+
+    /**
+     * Get the value of id
+     */ 
+    public function getFile()
+    {
+        return $this->file;
     }
 }

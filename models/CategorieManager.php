@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 
 /**
- *  Classe permettant de gérer les opérations en base de données concernant les objets Account
+ *  Classe permettant de gérer les opérations en base de données concernant les objets Categorie
  */
 class CategorieManager
 {
@@ -42,9 +42,9 @@ class CategorieManager
 	}
 
 	/**
-	 * Add account to the database
+	 * Add categorie to the database
 	 *
-	 * @param Account $account
+	 * @param Categorie $categorie
 	 */
 	public function add(Categorie $categorie)
 	{
@@ -54,7 +54,7 @@ class CategorieManager
 	}
 
 	/**
-	 * Get all accounts
+	 * Get all categories
 	 *
 	 */
 	public function getCategories()
@@ -68,21 +68,19 @@ class CategorieManager
 		$query->execute();
 		// On récupère un tableau contenant plusieurs tableaux associatifs
 		$dataCategories = $query->fetchAll(PDO::FETCH_ASSOC);
-
-		// A chaque tour de boucle, on récupère un tableau associatif concernant un seul compte
 		foreach ($dataCategories as $dataCategorie) 
 		{
-			// On crée un nouvel objet grâce au tableau associatif, qu'on stocke dans $arrayOfAccounts
+			// On crée un nouvel objet grâce au tableau associatif, qu'on stocke dans $arrayOfCategories
 			$arrayOfCategories[] = new Categorie($dataCategorie);
 		}
 		return $arrayOfCategories;
 	}
 
 	/**
-	 * Get an account by id
+	 * Get an categorie by id
 	 *
 	 * @param integer $id
-	 * @return Account
+	 * @return Categorie
 	 */
 	public function getCategorie(int $idCategorie)
 	{
@@ -96,9 +94,9 @@ class CategorieManager
 	}
 
 	/**
-	 * Update account
+	 * Update categorie
 	 *
-	 * @param Account $account
+	 * @param Categorie $categorie
 	 */
 	public function update(Categorie $categorie)
 	{
@@ -109,7 +107,7 @@ class CategorieManager
 	}
 
 	/**
-	 * Delete account
+	 * Delete categorie
 	 *
 	 * @param integer $id
 	 */
@@ -118,5 +116,12 @@ class CategorieManager
 		$query = $this->getDb()->prepare('DELETE FROM categories WHERE id = :id');
 		$query->bindValue("id", $id, PDO::PARAM_INT);		
 		$query->execute();
+	}
+
+	public function getLastCategorie(){
+		$query = $this->getDb()->query('SELECT * FROM categories ORDER BY categorie_id DESC LIMIT 1');
+		$categorieLast = $query->fetch(PDO::FETCH_ASSOC);
+		$objetCategorie = new categorie($categorieLast);
+		return $objetCategorie;
 	}
 }

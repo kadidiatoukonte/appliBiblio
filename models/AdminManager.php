@@ -33,9 +33,9 @@ class AdminManager
   }
 
   /**
-     * verif if user exist
+     * verif if admin exist
      *
-     * @param User $user
+     * @param Admin $admin
      * @return self
      */
     public function verifAdmin(Admin $admin)
@@ -51,9 +51,9 @@ class AdminManager
     }
 
     /**
-     * verif if user as disponibility for sign up
+     * verif if admin as disponibility for sign up
      *
-     * @param User $user
+     * @param Admin $admin
      * @return self
      */
     public function verifAdminDispo(Admin $admin)
@@ -68,9 +68,9 @@ class AdminManager
     }
 
     /**
-     * create user
+     * create admin
      *
-     * @param User $user
+     * @param Admin $admin
      * @return self
      */
     public function createAdmin(Admin $admin)
@@ -82,9 +82,9 @@ class AdminManager
         $query->execute();
     }
     /**
-     * update user
+     * update admin
      *
-     * @param User $user
+     * @param Admin $admin
      * @return self
      */
     public function updateAdmin(Admin $admin)
@@ -97,9 +97,9 @@ class AdminManager
 
   
   /**
-   * Get all users. It returns an array of objects $user
+   * Get all admins. It returns an array of objects $admin
    *
-   * @return array $arrayUsers
+   * @return array $arrayAdmins
    */
   public function getAdmins() 
   {
@@ -107,18 +107,25 @@ class AdminManager
     $query = $this->getDb()->query('SELECT * FROM admins');
     $admins = $query->fetchAll(PDO::FETCH_ASSOC);
 
-    // A chaque tour, on instancie un nouvel objet User qu'on stocke dans $arrayOfUsers[]
+    // A chaque tour, on instancie un nouvel objet User qu'on stocke dans $arrayOfAdmins[]
     foreach ($admins as $admin) {
       $arrayOfAdmins[] = new Admin($admin);
     }
-    // On renvoie le tableau contenant tous nos objets User
+    // On renvoie le tableau contenant tous nos objets Admin
     return $arrayOfAdmins;
   }
 
+  public function getAdmin(string $name)
+	{
+		$query = $this->getDb()->prepare('SELECT * FROM admins WHERE name = :name');
+		$query->bindValue("name", $name, PDO::PARAM_STR);
+		$query->execute();
+	}
+
   /**
-   * Add user in DB
+   * Add admin in DB
    *
-   * @param User $user
+   * @param Admin $admin
    */
   public function addAdmin(Admin $admin)
   {
